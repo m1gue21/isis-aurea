@@ -1,0 +1,123 @@
+---
+import { content, type Lang } from '../i18n/content';
+import { WHATSAPP_NUMBER } from '../config';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = content[lang].cards;
+const waHref = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.waMsg)}`;
+---
+
+<div id="reader" data-decks={JSON.stringify(t.decks)} data-positions={JSON.stringify(t.positions)}>
+  <div class="mx-auto mb-8 flex w-fit rounded-full border border-gold/40 bg-white/60 p-1" role="tablist">
+    <button type="button" data-deck="egyptian" class="deck-btn rounded-full px-5 py-2 text-sm font-medium transition">
+      {t.egyptian}
+    </button>
+    <button type="button" data-deck="spanish" class="deck-btn rounded-full px-5 py-2 text-sm font-medium transition">
+      {t.spanish}
+    </button>
+  </div>
+
+  <div class="grid grid-cols-3 gap-3 sm:gap-6">
+    {
+      t.positions.map((pos, i) => (
+        <div class="text-center">
+          <p class="mb-2 text-xs uppercase tracking-[0.2em] text-plum-soft">{pos}</p>
+          <div class="card-scene mx-auto aspect-[2/3] w-full max-w-[200px]">
+            <div class="card-inner relative h-full w-full" data-slot={i}>
+              <div class="card-face absolute inset-0 flex items-center justify-center rounded-2xl border-2 border-gold bg-gradient-to-br from-turquoise-deep via-plum to-turquoise-deep shadow-lg">
+                <span class="font-display text-4xl text-gold sm:text-6xl">☥</span>
+              </div>
+              <div class="card-face card-front absolute inset-0 flex flex-col items-center justify-center gap-2 rounded-2xl border-2 border-gold bg-ivory p-2 text-center shadow-lg sm:p-4">
+                <span class="slot-glyph text-3xl sm:text-5xl" />
+                <span class="slot-name font-display text-base font-semibold sm:text-xl" />
+                <span class="slot-meaning hidden text-xs leading-snug text-plum-soft sm:block" />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div id="meanings" class="mx-auto mt-6 max-w-xl space-y-2 text-sm text-plum-soft sm:hidden"></div>
+
+  <div class="mt-8 flex flex-col items-center gap-4">
+    <button
+      id="draw"
+      type="button"
+      class="rounded-full bg-turquoise px-8 py-3 font-medium text-white shadow transition hover:bg-turquoise-deep"
+    >
+      {t.draw}
+    </button>
+    <a
+      id="reader-cta"
+      href={waHref}
+      target="_blank"
+      rel="noopener"
+      class="hidden rounded-full bg-gold px-8 py-3 font-medium text-plum shadow transition hover:bg-gold-deep hover:text-white"
+    >
+      {t.cta}
+    </a>
+    <p class="text-xs text-plum-soft">{t.note}</p>
+  </div>
+</div>
+
+<script>
+  const root = document.getElementById('reader')!;
+  const decks = JSON.parse(root.dataset.decks!) as Record<string, { glyph: string; name: string; meaning: string }[]>;
+  const positions = JSON.parse(root.dataset.positions!) as string[];
+  const lang = document.documentElement.lang;
+  const labels = lang === 'en' ? { draw: 'Draw my cards', again: 'Shuffle again' } : { draw: 'Sacar mis cartas', again: 'Barajar de nuevo' };
+
+  let deck = 'egyptian';
+  const btns = root.querySelectorAll<HTMLButtonElement>('.deck-btn');
+  const drawBtn = document.getElementById('draw')!;
+  const cta = document.getElementById('reader-cta')!;
+  const meanings = document.getElementById('meanings')!;
+  const inners = root.querySelectorAll<HTMLElement>('.card-inner');
+
+  const paintTabs = () =>
+    btns.forEach((b) => {
+      const on = b.dataset.deck === deck;
+      b.classList.toggle('bg-plum', on);
+      b.classList.toggle('text-ivory', on);
+      b.classList.toggle('text-plum', !on);
+    });
+
+  const reset = () => {
+    inners.forEach((el) => el.classList.remove('is-flipped'));
+    cta.classList.add('hidden');
+    meanings.innerHTML = '';
+    drawBtn.textContent = labels.draw;
+  };
+
+  btns.forEach((b) =>
+    b.addEventListener('click', () => {
+      deck = b.dataset.deck!;
+      paintTabs();
+      reset();
+    }),
+  );
+
+  drawBtn.addEventListener('click', () => {
+    reset();
+    const pool = [...decks[deck]].sort(() => Math.random() - 0.5).slice(0, 3);
+    setTimeout(() => {
+      inners.forEach((el, i) => {
+        const c = pool[i];
+        el.querySelector('.slot-glyph')!.textContent = c.glyph;
+        el.querySelector('.slot-name')!.textContent = c.name;
+        el.querySelector('.slot-meaning')!.textContent = c.meaning;
+        setTimeout(() => el.classList.add('is-flipped'), i * 350);
+      });
+      meanings.innerHTML = pool.map((c, i) => `<p><strong>${positions[i]} · ${c.name}:</strong> ${c.meaning}</p>`).join('');
+      cta.classList.remove('hidden');
+      drawBtn.textContent = labels.again;
+    }, 450);
+  });
+
+  paintTabs();
+</script>

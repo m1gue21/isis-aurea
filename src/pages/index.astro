@@ -1,0 +1,16 @@
+---
+// Redirige al idioma del navegador (por defecto español).
+---
+
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/es/" />
+    <title>Isis Aurea</title>
+    <script is:inline>
+      var l = (navigator.language || 'es').toLowerCase().startsWith('en') ? 'en' : 'es';
+      location.replace('/' + l + '/');
+    </script>
+  </head>
+  <body></body>
+</html>

@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #fbf5e9;
+  --color-sand: #f1e3c6;
+  --color-gold: #c9962b;
+  --color-gold-deep: #9a6f12;
+  --color-turquoise: #1f8a8a;
+  --color-turquoise-deep: #146566;
+  --color-terracotta: #c4604a;
+  --color-plum: #2e2540;
+  --color-plum-soft: #5a4d70;
+
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "Jost", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-ivory);
+  color: var(--color-plum);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.bg-papyrus {
+  background:
+    radial-gradient(60rem 30rem at 85% -10%, rgb(31 138 138 / 0.14), transparent 60%),
+    radial-gradient(50rem 28rem at -10% 20%, rgb(201 150 43 / 0.18), transparent 60%),
+    var(--color-ivory);
+}
+
+/* Flip de cartas */
+.card-scene {
+  perspective: 900px;
+}
+.card-inner {
+  transition: transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  transform-style: preserve-3d;
+}
+.card-inner.is-flipped {
+  transform: rotateY(180deg);
+}
+.card-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+.card-front {
+  transform: rotateY(180deg);
+}
