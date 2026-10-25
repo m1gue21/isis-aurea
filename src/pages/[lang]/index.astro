@@ -112,7 +112,7 @@ const nav = [
     </section>
 
     <!-- No es brujería -->
-    <section class="bg-gradient-to-r from-turquoise-deep to-plum py-16 text-ivory">
+    <section class="bg-night edge-top py-16 text-ivory" style="--edge:#2e2540">
       <div class="reveal mx-auto max-w-4xl px-5 text-center">
         <h2 class="font-display text-3xl font-semibold md:text-4xl">{x.notWitch.title}</h2>
         <p class="mx-auto mt-4 max-w-2xl font-light leading-relaxed text-ivory/85">{x.notWitch.text}</p>
@@ -140,7 +140,7 @@ const nav = [
     </section>
 
     <!-- Services -->
-    <section id="services" class="bg-sand/50 py-20">
+    <section id="services" class="bg-sand-rich edge-top py-20" style="--edge:#f6ead0">
       <div class="mx-auto max-w-6xl px-5">
         <p class="mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{t.services.kicker}</p>
         <h2 class="mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{t.services.title}</h2>
@@ -172,7 +172,7 @@ const nav = [
     </section>
 
     <!-- Comparativa de barajas -->
-    <section class="bg-sand/50 py-20">
+    <section class="bg-sand-rich py-20">
       <div class="mx-auto max-w-5xl px-5">
         <p class="reveal mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.compare.kicker}</p>
         <h2 class="reveal mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{x.compare.title}</h2>
@@ -205,7 +205,7 @@ const nav = [
     </section>
 
     <!-- About -->
-    <section id="about" class="bg-gradient-to-br from-plum to-turquoise-deep py-20 text-ivory">
+    <section id="about" class="bg-night edge-top py-20 text-ivory" style="--edge:#2e2540">
       <div class="reveal mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
         <!-- Foto: public/images/about.jpg -->
         <div class="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-full border-4 border-gold bg-gradient-to-br from-gold/40 to-terracotta/40">
@@ -240,7 +240,8 @@ const nav = [
     </section>
 
     <!-- Confianza -->
-    <section class="mx-auto max-w-5xl px-5 py-20">
+    <section class="bg-glow">
+    <div class="mx-auto max-w-5xl px-5 py-20">
       <div class="reveal rounded-[2rem] border border-gold/40 bg-white/60 p-8 text-center shadow-sm md:p-14">
         <p class="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.privacy.kicker}</p>
         <h2 class="font-display text-4xl font-semibold md:text-5xl">{x.privacy.title}</h2>
@@ -257,10 +258,11 @@ const nav = [
           }
         </div>
       </div>
+    </div>
     </section>
 
     <!-- FAQ -->
-    <section id="faq" class="bg-sand/50 py-20">
+    <section id="faq" class="bg-sand-rich edge-top py-20" style="--edge:#f6ead0">
       <div class="reveal mx-auto max-w-3xl px-5">
         <p class="mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{t.faq.kicker}</p>
         <h2 class="mb-10 text-center font-display text-4xl font-semibold md:text-5xl">{t.faq.title}</h2>
@@ -281,16 +283,18 @@ const nav = [
     </section>
 
     <!-- Final CTA -->
-    <section class="reveal mx-auto max-w-4xl px-5 py-20 text-center">
+    <section class="bg-glow">
+    <div class="reveal mx-auto max-w-4xl px-5 py-20 text-center">
       <h2 class="font-display text-4xl font-semibold md:text-5xl">{t.final.title}</h2>
       <p class="mx-auto mt-4 max-w-md font-light text-plum-soft">{t.final.text}</p>
       <a href={wa(t.final.waMsg)} target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:brightness-95">
         {t.final.cta}
       </a>
+    </div>
     </section>
   </main>
 
-  <footer class="border-t border-gold/30 bg-plum py-10 text-center text-sm text-ivory/70">
+  <footer class="bg-night edge-top py-10 text-center text-sm text-ivory/70" style="--edge:#2e2540">
     <p class="font-display text-2xl text-gold">☥ {BRAND}</p>
     <p class="mx-auto mt-3 max-w-xl px-5">{t.footer.disclaimer}</p>
     <p class="mt-4">© {new Date().getFullYear()} {BRAND}. {t.footer.rights}</p>
