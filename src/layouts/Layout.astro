@@ -22,6 +22,7 @@ const other = lang === 'es' ? 'en' : 'es';
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta name="theme-color" content="#fbf5e9" />
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="alternate" hreflang={other} href={`/${other}/`} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,5 +34,23 @@ const other = lang === 'es' ? 'en' : 'es';
   </head>
   <body class="bg-papyrus antialiased">
     <slot />
+    <script>
+      const els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver(
+          (entries) =>
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add('in');
+                io.unobserve(e.target);
+              }
+            }),
+          { threshold: 0.12 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        els.forEach((el) => el.classList.add('in'));
+      }
+    </script>
   </body>
 </html>

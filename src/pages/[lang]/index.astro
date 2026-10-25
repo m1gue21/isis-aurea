@@ -2,6 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import CardReader from '../../components/CardReader.astro';
 import { content, type Lang } from '../../i18n/content';
+import { extra } from '../../i18n/extra';
 import { WHATSAPP_NUMBER, BRAND } from '../../config';
 
 export function getStaticPaths() {
@@ -10,10 +11,12 @@ export function getStaticPaths() {
 
 const lang = Astro.params.lang as Lang;
 const t = content[lang];
+const x = extra[lang];
 const other = lang === 'es' ? 'en' : 'es';
 const wa = (msg: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
 const nav = [
+  ['approach', lang === 'es' ? 'Mi enfoque' : 'My approach'],
   ['services', t.nav.services],
   ['cards', t.nav.cards],
   ['about', t.nav.about],
@@ -49,10 +52,13 @@ const nav = [
 
   <main>
     <!-- Hero -->
-    <section class="mx-auto grid max-w-6xl items-center gap-10 px-5 py-16 md:grid-cols-2 md:py-24">
-      <div>
+    <section class="relative mx-auto grid max-w-6xl items-center gap-10 overflow-hidden px-5 py-16 md:grid-cols-2 md:py-24">
+      <span class="animate-float pointer-events-none absolute left-2 top-10 text-4xl text-gold/40" aria-hidden="true">☥</span>
+      <span class="animate-float pointer-events-none absolute bottom-10 left-1/2 text-3xl text-turquoise/30" style="animation-delay:-3s" aria-hidden="true">✦</span>
+      <span class="animate-float pointer-events-none absolute right-4 top-6 text-3xl text-terracotta/30" style="animation-delay:-5s" aria-hidden="true">𓂀</span>
+      <div class="reveal">
         <p class="mb-4 text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{t.hero.kicker}</p>
-        <h1 class="font-display text-5xl font-semibold leading-[1.05] text-plum md:text-6xl">{t.hero.title}</h1>
+        <h1 class="font-display text-5xl font-semibold leading-[1.05] md:text-6xl"><span class="text-shimmer">{t.hero.title}</span></h1>
         <p class="mt-6 max-w-lg text-lg font-light leading-relaxed text-plum-soft">{t.hero.text}</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a href={wa(t.hero.waMsg)} target="_blank" rel="noopener" class="rounded-full bg-gold px-8 py-3 font-medium text-plum shadow-lg shadow-gold/30 transition hover:bg-gold-deep hover:text-white">
@@ -64,9 +70,60 @@ const nav = [
         </div>
       </div>
       <!-- Foto: public/images/hero.jpg (ver docs/PLAN-FOTOS-IA.md) -->
-      <div class="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden rounded-t-full border-4 border-gold/70 bg-gradient-to-b from-turquoise/30 via-sand to-terracotta/30 shadow-2xl">
+      <div class="reveal relative mx-auto w-full max-w-md" style="--d:150ms">
+        <div class="animate-spin-slow absolute -inset-5 rounded-full border border-dashed border-gold/50" aria-hidden="true"></div>
+      <div class="relative aspect-[4/5] w-full overflow-hidden rounded-t-full border-4 border-gold/70 bg-gradient-to-b from-turquoise/30 via-sand to-terracotta/30 shadow-2xl">
         <img src="/images/hero.jpg" alt={BRAND} class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()" />
         <span class="absolute inset-0 -z-0 flex items-center justify-center font-display text-8xl text-gold/50">☥</span>
+      </div>
+      </div>
+    </section>
+
+    <!-- Enfoque -->
+    <section id="approach" class="mx-auto max-w-6xl px-5 py-20">
+      <div class="reveal mx-auto max-w-3xl text-center">
+        <p class="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.approach.kicker}</p>
+        <h2 class="font-display text-4xl font-semibold md:text-5xl">{x.approach.title}</h2>
+        <p class="mt-5 text-lg font-light leading-relaxed text-plum-soft">{x.approach.text}</p>
+      </div>
+      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          x.approach.pillars.map((p, i) => (
+            <div class="reveal rounded-3xl border border-gold/30 bg-white/60 p-6 text-center transition hover:-translate-y-1 hover:shadow-lg" style={`--d:${i * 100}ms`}>
+              <span class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-gold/15 text-3xl text-gold-deep">{p.icon}</span>
+              <h3 class="font-display text-xl font-semibold">{p.t}</h3>
+              <p class="mt-2 text-sm font-light leading-relaxed text-plum-soft">{p.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <!-- No es brujería -->
+    <section class="bg-gradient-to-r from-turquoise-deep to-plum py-16 text-ivory">
+      <div class="reveal mx-auto max-w-4xl px-5 text-center">
+        <h2 class="font-display text-3xl font-semibold md:text-4xl">{x.notWitch.title}</h2>
+        <p class="mx-auto mt-4 max-w-2xl font-light leading-relaxed text-ivory/85">{x.notWitch.text}</p>
+        <div class="mt-6 flex flex-wrap justify-center gap-2">
+          {x.notWitch.chips.map((c) => <span class="rounded-full border border-gold/60 px-4 py-1.5 text-sm text-gold">{c}</span>)}
+        </div>
+      </div>
+    </section>
+
+    <!-- Áreas de la vida -->
+    <section class="mx-auto max-w-6xl px-5 py-20">
+      <p class="reveal mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.areas.kicker}</p>
+      <h2 class="reveal mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{x.areas.title}</h2>
+      <div class="grid grid-cols-2 gap-4 md:grid-cols-5">
+        {
+          x.areas.items.map((a, i) => (
+            <div class="reveal group rounded-3xl bg-gradient-to-b from-ivory to-sand p-6 text-center ring-1 ring-gold/30 transition hover:-translate-y-2 hover:ring-turquoise" style={`--d:${i * 90}ms`}>
+              <span class="mb-3 inline-block text-4xl text-turquoise transition group-hover:scale-125">{a.icon}</span>
+              <h3 class="font-display text-xl font-semibold">{a.t}</h3>
+              <p class="mt-1 text-sm font-light text-plum-soft">{a.d}</p>
+            </div>
+          ))
+        }
       </div>
     </section>
 
@@ -77,8 +134,8 @@ const nav = [
         <h2 class="mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{t.services.title}</h2>
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {
-            t.services.items.map((s) => (
-              <article class="group flex flex-col rounded-3xl border border-gold/30 bg-ivory p-7 shadow-sm transition hover:-translate-y-1 hover:border-turquoise hover:shadow-xl">
+            t.services.items.map((s, i) => (
+              <article class="reveal group flex flex-col rounded-3xl border border-gold/30 bg-ivory p-7 shadow-sm transition hover:-translate-y-1 hover:border-turquoise hover:shadow-xl" style={`--d:${(i % 3) * 100}ms`}>
                 <span class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-turquoise/10 text-3xl text-turquoise">{s.icon}</span>
                 <h3 class="font-display text-2xl font-semibold">{s.title}</h3>
                 <p class="mt-2 flex-1 font-light leading-relaxed text-plum-soft">{s.desc}</p>
@@ -92,8 +149,32 @@ const nav = [
       </div>
     </section>
 
+    <!-- Comparativa de barajas -->
+    <section class="bg-sand/50 py-20">
+      <div class="mx-auto max-w-5xl px-5">
+        <p class="reveal mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.compare.kicker}</p>
+        <h2 class="reveal mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{x.compare.title}</h2>
+        <div class="grid gap-6 md:grid-cols-2">
+          {
+            [x.compare.spanish, x.compare.egyptian].map((d, i) => (
+              <article class={`reveal relative flex flex-col rounded-3xl p-8 ${i === 1 ? 'bg-gradient-to-br from-plum to-turquoise-deep text-ivory shadow-2xl' : 'border border-gold/40 bg-ivory'}`} style={`--d:${i * 150}ms`}>
+                {'badge' in d && <span class="absolute -top-3 right-6 rounded-full bg-gold px-4 py-1 text-xs font-semibold uppercase tracking-widest text-plum">{d.badge}</span>}
+                <p class={`text-xs font-medium uppercase tracking-[0.25em] ${i === 1 ? 'text-gold' : 'text-gold-deep'}`}>{d.horizon}</p>
+                <h3 class="mt-2 font-display text-3xl font-semibold">{d.name}</h3>
+                <p class={`mt-1 font-display text-5xl font-semibold ${i === 1 ? 'text-gold' : 'text-turquoise'}`}>{d.span}</p>
+                <ul class="my-6 flex-1 space-y-3 font-light">
+                  {d.points.map((p) => <li class="flex gap-3"><span class={i === 1 ? 'text-gold' : 'text-terracotta'}>✦</span>{p}</li>)}
+                </ul>
+                <a href={wa(d.wa)} target="_blank" rel="noopener" class={`rounded-full px-6 py-3 text-center font-medium transition ${i === 1 ? 'bg-gold text-plum hover:bg-ivory' : 'bg-turquoise text-white hover:bg-turquoise-deep'}`}>{d.cta}</a>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <!-- Cards -->
-    <section id="cards" class="mx-auto max-w-4xl px-5 py-20">
+    <section id="cards" class="reveal mx-auto max-w-4xl px-5 py-20">
       <p class="mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{t.cards.kicker}</p>
       <h2 class="mb-4 text-center font-display text-4xl font-semibold md:text-5xl">{t.cards.title}</h2>
       <p class="mx-auto mb-10 max-w-xl text-center font-light text-plum-soft">{t.cards.text}</p>
@@ -102,7 +183,7 @@ const nav = [
 
     <!-- About -->
     <section id="about" class="bg-gradient-to-br from-plum to-turquoise-deep py-20 text-ivory">
-      <div class="mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
+      <div class="reveal mx-auto grid max-w-6xl items-center gap-10 px-5 md:grid-cols-2">
         <!-- Foto: public/images/about.jpg -->
         <div class="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-full border-4 border-gold bg-gradient-to-br from-gold/40 to-terracotta/40">
           <img src="/images/about.jpg" alt={BRAND} class="absolute inset-0 h-full w-full object-cover" onerror="this.remove()" />
@@ -119,7 +200,7 @@ const nav = [
     </section>
 
     <!-- How -->
-    <section id="how" class="mx-auto max-w-6xl px-5 py-20">
+    <section id="how" class="reveal mx-auto max-w-6xl px-5 py-20">
       <p class="mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{t.how.kicker}</p>
       <h2 class="mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{t.how.title}</h2>
       <div class="grid gap-8 md:grid-cols-3">
@@ -135,9 +216,29 @@ const nav = [
       </div>
     </section>
 
+    <!-- Confianza -->
+    <section class="mx-auto max-w-5xl px-5 py-20">
+      <div class="reveal rounded-[2rem] border border-gold/40 bg-white/60 p-8 text-center shadow-sm md:p-14">
+        <p class="mb-3 text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.privacy.kicker}</p>
+        <h2 class="font-display text-4xl font-semibold md:text-5xl">{x.privacy.title}</h2>
+        <p class="mx-auto mt-4 max-w-2xl font-light leading-relaxed text-plum-soft">{x.privacy.text}</p>
+        <div class="mt-10 grid gap-6 sm:grid-cols-3">
+          {
+            x.privacy.points.map((p) => (
+              <div>
+                <span class="mb-2 block text-3xl">{p.icon}</span>
+                <h3 class="font-display text-xl font-semibold">{p.t}</h3>
+                <p class="text-sm font-light text-plum-soft">{p.d}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
     <!-- FAQ -->
     <section id="faq" class="bg-sand/50 py-20">
-      <div class="mx-auto max-w-3xl px-5">
+      <div class="reveal mx-auto max-w-3xl px-5">
         <p class="mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{t.faq.kicker}</p>
         <h2 class="mb-10 text-center font-display text-4xl font-semibold md:text-5xl">{t.faq.title}</h2>
         <div class="space-y-3">
@@ -157,7 +258,7 @@ const nav = [
     </section>
 
     <!-- Final CTA -->
-    <section class="mx-auto max-w-4xl px-5 py-20 text-center">
+    <section class="reveal mx-auto max-w-4xl px-5 py-20 text-center">
       <h2 class="font-display text-4xl font-semibold md:text-5xl">{t.final.title}</h2>
       <p class="mx-auto mt-4 max-w-md font-light text-plum-soft">{t.final.text}</p>
       <a href={wa(t.final.waMsg)} target="_blank" rel="noopener" class="mt-8 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-10 py-4 text-lg font-semibold text-white shadow-lg transition hover:brightness-95">
@@ -178,7 +279,7 @@ const nav = [
     target="_blank"
     rel="noopener"
     aria-label={t.fab}
-    class="fixed bottom-5 right-5 z-50 flex items-center gap-2 rounded-full bg-[#25D366] px-5 py-3 font-medium text-white shadow-xl transition hover:scale-105"
+    class="fixed bottom-5 right-5 z-50 flex items-center gap-2 animate-pulse-ring rounded-full bg-[#25D366] px-5 py-3 font-medium text-white shadow-xl transition hover:scale-105"
   >
     <svg viewBox="0 0 32 32" class="h-6 w-6 fill-current" aria-hidden="true">
       <path d="M16 3C9 3 3.5 8.6 3.5 15.5c0 2.4.7 4.7 1.9 6.600L3.500 29l7.100-1.800c1.800 1 3.800 1.500 5.900 1.500 7 0 12.500-5.600 12.500-12.500S23 3 16 3zm0 22.600c-1.900 0-3.700-.5-5.300-1.500l-.4-.2-4.200 1.100 1.100-4.100-.3-.4a10 10 0 0 1-1.500-5.300C5.400 9.700 10.200 5.200 16 5.200s10.600 4.500 10.600 10.300S21.800 25.600 16 25.600zm5.800-7.500c-.3-.2-1.900-.9-2.200-1s-.5-.2-.7.200-.8 1-1 1.200-.4.200-.7.100a8.600 8.600 0 0 1-4.300-3.700c-.3-.6.300-.5.900-1.700.1-.2 0-.4 0-.5l-1-2.300c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.6.100-.9.400s-1.200 1.200-1.200 2.800 1.200 3.300 1.400 3.500 2.400 3.700 5.800 5.100c2.100.9 2.900.9 4 .8.600-.1 1.900-.8 2.200-1.600s.3-1.400.2-1.600-.3-.2-.6-.4z" />
