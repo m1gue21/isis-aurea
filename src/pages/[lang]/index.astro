@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import CardReader from '../../components/CardReader.astro';
+import Shop from '../../components/Shop.astro';
+import { shop } from '../../i18n/shop';
 import { content, type Lang } from '../../i18n/content';
 import { extra } from '../../i18n/extra';
 import { WHATSAPP_NUMBER, BRAND, SOCIAL } from '../../config';
@@ -30,6 +32,7 @@ const compareImages = ['/images/reading-spanish.jpg', '/images/reading-egyptian.
 const nav = [
   ['approach', lang === 'es' ? 'Mi enfoque' : 'My approach'],
   ['services', t.nav.services],
+  ['shop', shop[lang].nav],
   ['cards', t.nav.cards],
   ['about', t.nav.about],
   ['how', t.nav.how],
@@ -171,8 +174,16 @@ const nav = [
       </div>
     </section>
 
+    <!-- Tienda -->
+    <section id="shop" class="mx-auto max-w-6xl px-5 py-20">
+      <p class="reveal mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{shop[lang].kicker}</p>
+      <h2 class="reveal mb-4 text-center font-display text-4xl font-semibold md:text-5xl">{shop[lang].title}</h2>
+      <p class="reveal mx-auto mb-10 max-w-2xl text-center font-light leading-relaxed text-plum-soft">{shop[lang].text}</p>
+      <Shop lang={lang} />
+    </section>
+
     <!-- Comparativa de barajas -->
-    <section class="bg-sand-rich py-20">
+    <section class="bg-sand-rich edge-top py-20" style="--edge:#f6ead0">
       <div class="mx-auto max-w-5xl px-5">
         <p class="reveal mb-3 text-center text-xs font-medium uppercase tracking-[0.3em] text-gold-deep">{x.compare.kicker}</p>
         <h2 class="reveal mb-12 text-center font-display text-4xl font-semibold md:text-5xl">{x.compare.title}</h2>

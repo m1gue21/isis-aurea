@@ -1,0 +1,100 @@
+---
+import { shop } from '../i18n/shop';
+import { WHATSAPP_NUMBER } from '../config';
+import type { Lang } from '../i18n/content';
+
+interface Props {
+  lang: Lang;
+}
+const { lang } = Astro.props;
+const t = shop[lang];
+const wa = (product: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t.waMsg.replace('{product}', product))}`;
+---
+
+<div id="shop-root">
+  <div class="-mx-5 mb-8 overflow-x-auto px-5 pb-2 sm:mx-0 sm:overflow-visible sm:px-0" role="tablist">
+    <div class="mx-auto flex w-max gap-2 sm:w-auto sm:flex-wrap sm:justify-center">
+      {
+        t.categories.map((c, i) => (
+          <button
+            type="button"
+            role="tab"
+            data-cat={c.id}
+            aria-selected={i === 0}
+            class="shop-tab flex shrink-0 items-center gap-2 rounded-full border border-gold/50 px-4 py-2 text-sm font-medium transition hover:border-turquoise"
+          >
+            <span class="text-base text-turquoise">{c.icon}</span>
+            {c.name}
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  {
+    t.categories.map((c, i) => (
+      <div data-panel={c.id} class={i === 0 ? '' : 'hidden'} role="tabpanel">
+        <p class="mx-auto mb-8 max-w-xl text-center font-light text-plum-soft">{c.blurb}</p>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {c.products.map((p) => (
+            <article class="shop-card group flex flex-col overflow-hidden rounded-3xl border border-gold/30 bg-ivory shadow-sm transition hover:-translate-y-1 hover:border-turquoise hover:shadow-xl">
+              <div class="relative flex h-28 items-center justify-center overflow-hidden bg-gradient-to-br from-turquoise/20 via-sand to-terracotta/20">
+                <span class="text-5xl text-gold-deep/70 transition duration-500 group-hover:scale-125">{c.icon}</span>
+                {p.price && (
+                  <span class="absolute right-3 top-3 rounded-full bg-plum px-3 py-1 text-xs font-semibold text-gold">{p.price}</span>
+                )}
+              </div>
+              <div class="flex flex-1 flex-col p-6">
+                <h3 class="font-display text-xl font-semibold">{p.name}</h3>
+                <p class="mt-2 flex-1 text-sm font-light leading-relaxed text-plum-soft">{p.desc}</p>
+                <div class="mt-4 flex items-center justify-between gap-3">
+                  <span class="text-xs text-plum-soft">{p.price ?? t.consult}</span>
+                  <a
+                    href={wa(p.name)}
+                    target="_blank"
+                    rel="noopener"
+                    class="rounded-full bg-turquoise px-4 py-2 text-sm font-medium text-white transition hover:bg-turquoise-deep"
+                  >
+                    {t.ask}
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+
+  <p class="mx-auto mt-10 max-w-xl text-center text-xs text-plum-soft">{t.note}</p>
+</div>
+
+<script>
+  const root = document.getElementById('shop-root')!;
+  const tabs = root.querySelectorAll<HTMLButtonElement>('.shop-tab');
+  const panels = root.querySelectorAll<HTMLElement>('[data-panel]');
+
+  const show = (id: string) => {
+    tabs.forEach((b) => {
+      const on = b.dataset.cat === id;
+      b.setAttribute('aria-selected', String(on));
+      b.classList.toggle('bg-plum', on);
+      b.classList.toggle('text-ivory', on);
+      b.classList.toggle('border-plum', on);
+    });
+    panels.forEach((p) => {
+      const on = p.dataset.panel === id;
+      p.classList.toggle('hidden', !on);
+      if (on) p.querySelectorAll('.shop-card').forEach((c, i) => {
+        (c as HTMLElement).style.animationDelay = `${i * 60}ms`;
+        c.classList.remove('fade-up');
+        void (c as HTMLElement).offsetWidth;
+        c.classList.add('fade-up');
+      });
+    });
+  };
+
+  tabs.forEach((b) => b.addEventListener('click', () => show(b.dataset.cat!)));
+  show(tabs[0].dataset.cat!);
+</script>
