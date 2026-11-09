@@ -5,6 +5,8 @@ export interface Product {
   desc: string;
   /** Precio ya formateado, por ejemplo "$89.900 COP". Vacío = "consultar precio". */
   price?: string;
+  /** Ruta de la foto del producto, por ejemplo "/images/shop/amatista.jpg". Si falta, se muestra el símbolo. */
+  img?: string;
 }
 
 export interface Category {
@@ -12,6 +14,8 @@ export interface Category {
   icon: string;
   name: string;
   blurb: string;
+  /** Foto ancha de la categoría (banner), por ejemplo "/images/shop/stones.jpg". Opcional. */
+  image?: string;
   products: Product[];
 }
 
