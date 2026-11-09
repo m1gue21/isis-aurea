@@ -1,5 +1,5 @@
 ---
-import { shop } from '../i18n/shop';
+import { shop, productImages } from '../i18n/shop';
 import { WHATSAPP_NUMBER } from '../config';
 import type { Lang } from '../i18n/content';
 
@@ -42,11 +42,14 @@ const wa = (product: string) =>
         )}
         <p class="mx-auto mb-8 max-w-xl text-center font-light text-plum-soft">{c.blurb}</p>
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {c.products.map((p) => (
+          {c.products.map((p, idx) => {
+            const file = productImages[c.id]?.[idx];
+            const img = p.img ?? (file ? `/images/shop/${file}.jpg` : undefined);
+            return (
             <article class="shop-card group flex flex-col overflow-hidden rounded-3xl border border-gold/30 bg-ivory shadow-sm transition hover:-translate-y-1 hover:border-turquoise hover:shadow-xl">
-              <div class={`relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-turquoise/20 via-sand to-terracotta/20 ${p.img ? 'aspect-[4/3]' : 'h-28'}`}>
-                {p.img ? (
-                  <img src={p.img} alt={p.name} loading="lazy" decoding="async" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
+              <div class={`relative flex items-center justify-center overflow-hidden bg-gradient-to-br from-turquoise/20 via-sand to-terracotta/20 ${img ? 'aspect-[4/3]' : 'h-28'}`}>
+                {img ? (
+                  <img src={img} alt={p.name} loading="lazy" decoding="async" class="h-full w-full object-cover transition duration-700 group-hover:scale-105" />
                 ) : (
                   <span class="text-5xl text-gold-deep/70 transition duration-500 group-hover:scale-125">{c.icon}</span>
                 )}
@@ -70,7 +73,8 @@ const wa = (product: string) =>
                 </div>
               </div>
             </article>
-          ))}
+            );
+          })}
         </div>
       </div>
     ))

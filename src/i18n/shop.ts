@@ -221,3 +221,16 @@ export const shop = {
     ] as Category[],
   },
 } satisfies Record<Lang, unknown>;
+
+/**
+ * Fotos provisionales por producto, en el mismo orden que `products` de cada categoría
+ * (válido para español e inglés). Fuente de las fotos de stock: docs/CREDITOS-IMAGENES.md.
+ */
+export const productImages: Record<string, string[]> = {
+  stones: ['amatista', 'cuarzo-rosado', 'citrino', 'turmalina', 'ojo-tigre', 'selenita'],
+  incense: ['palo-santo', 'salvia', 'incienso', 'sahumerio', 'aromas'],
+  candles: ['vela-colores', 'vela-aromatica', 'vela-decorativa', 'vela-ritual'],
+  amulets: ['pulsera-piedras', 'pulsera-ojo-turco', 'amuleto', 'dije', 'proteccion'],
+  tools: ['baraja-espanola', 'tarot-egipcio', 'oraculo', 'pendulo'],
+  kits: ['kit-prosperidad', 'kit-proteccion', 'kit-armonizacion', 'kit-amor', 'kit-limpieza'],
+};
