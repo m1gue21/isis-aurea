@@ -34,6 +34,7 @@ export const shop = {
     categories: [
       {
         id: 'stones',
+        image: '/images/og.jpg',
         icon: '◆',
         name: 'Piedras y cuarzos',
         blurb: 'Minerales con significado simbólico tradicional.',
@@ -48,6 +49,7 @@ export const shop = {
       },
       {
         id: 'incense',
+        image: '/images/protection.jpg',
         icon: '≈',
         name: 'Inciensos y sahumerios',
         blurb: 'Aromas para limpiar, relajar y armonizar tu espacio.',
@@ -61,6 +63,7 @@ export const shop = {
       },
       {
         id: 'candles',
+        image: '/images/candles.jpg',
         icon: '♨',
         name: 'Velas espirituales',
         blurb: 'Para acompañar tus intenciones y rituales.',
@@ -73,6 +76,7 @@ export const shop = {
       },
       {
         id: 'amulets',
+        image: '/images/about.jpg',
         icon: '𓂀',
         name: 'Amuletos y accesorios',
         blurb: 'Piezas de protección simbólica para llevar contigo.',
@@ -86,6 +90,7 @@ export const shop = {
       },
       {
         id: 'tools',
+        image: '/images/reading-spanish.jpg',
         icon: '☥',
         name: 'Cartas y herramientas',
         blurb: 'Para aprender y practicar el arte de las cartas.',
@@ -98,6 +103,7 @@ export const shop = {
       },
       {
         id: 'kits',
+        image: '/images/reading-egyptian.jpg',
         icon: '✦',
         name: 'Kits espirituales',
         blurb: 'Un regalo con intención, listo en una caja bonita.',
@@ -127,6 +133,7 @@ export const shop = {
     categories: [
       {
         id: 'stones',
+        image: '/images/og.jpg',
         icon: '◆',
         name: 'Stones & crystals',
         blurb: 'Minerals with traditional symbolic meaning.',
@@ -141,6 +148,7 @@ export const shop = {
       },
       {
         id: 'incense',
+        image: '/images/protection.jpg',
         icon: '≈',
         name: 'Incense & smudging',
         blurb: 'Scents to cleanse, relax and harmonize your space.',
@@ -154,6 +162,7 @@ export const shop = {
       },
       {
         id: 'candles',
+        image: '/images/candles.jpg',
         icon: '♨',
         name: 'Spiritual candles',
         blurb: 'To accompany your intentions and rituals.',
@@ -166,6 +175,7 @@ export const shop = {
       },
       {
         id: 'amulets',
+        image: '/images/about.jpg',
         icon: '𓂀',
         name: 'Amulets & accessories',
         blurb: 'Symbolic protection pieces to carry with you.',
@@ -179,6 +189,7 @@ export const shop = {
       },
       {
         id: 'tools',
+        image: '/images/reading-spanish.jpg',
         icon: '☥',
         name: 'Cards & tools',
         blurb: 'To learn and practice the art of the cards.',
@@ -191,6 +202,7 @@ export const shop = {
       },
       {
         id: 'kits',
+        image: '/images/reading-egyptian.jpg',
         icon: '✦',
         name: 'Spiritual kits',
         blurb: 'A gift with intention, ready in a beautiful box.',
