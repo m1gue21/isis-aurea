@@ -15,7 +15,7 @@ Plan de **15 publicaciones para Instagram y 15 para Facebook**, con la guía par
 | Qué | Instagram | Facebook |
 |---|---|---|
 | Nombre | Isis Aurea · Cartas y Rituales | Isis Aurea |
-| Usuario | @isisaurea1 | (página, no perfil personal) |
+| Usuario | @aureaisis1 | (página, no perfil personal) |
 | Foto de perfil | Ankh dorado sobre fondo ciruela o marfil (sin rostro) | La misma |
 | Portada | — | Imagen `og.jpg` del sitio |
 | Enlace | `https://isis-aurea.vercel.app/es/` | El mismo, en la sección "Información" |

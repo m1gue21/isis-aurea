@@ -6,6 +6,6 @@ export const SITE_URL = 'https://isis-aurea.vercel.app';
 
 // Redes sociales. Dejar vacío ('') para ocultar el enlace hasta tener la URL.
 export const SOCIAL = {
-  instagram: 'https://www.instagram.com/isisaurea1/',
+  instagram: 'https://www.instagram.com/aureaisis1/',
   facebook: '', // Pegar aquí la URL de la página de Facebook cuando exista.
 };
