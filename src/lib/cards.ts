@@ -198,8 +198,19 @@ interface Egy {
   emblem: (g: string) => string;
 }
 
-const wing = `<path d="M10,-6 C30,-30 62,-30 72,-8 C60,-12 54,-4 58,6 C48,0 42,8 44,18 C35,10 26,16 24,26 C18,14 10,12 10,-6 Z" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.4" stroke-linejoin="round"/>
-  <path d="M16,0 C34,-18 56,-18 64,-6 M18,8 C34,-4 50,0 54,6 M20,16 C32,8 42,12 42,18" fill="none" stroke="${GOLD_DEEP}" stroke-width="1" stroke-linecap="round"/>`;
+const wing = `<ellipse transform="translate(14 -2) rotate(-100) translate(0 27.6)" rx="7.2" ry="30" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-86) translate(0 32.2)" rx="7.2" ry="35" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-72) translate(0 36.8)" rx="7.2" ry="40" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-58) translate(0 38.6)" rx="7.2" ry="42" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-44) translate(0 36.8)" rx="7.2" ry="40" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-31) translate(0 32.2)" rx="7.2" ry="35" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-19) translate(0 25.8)" rx="7.2" ry="28" fill="#f4e2a6" stroke="${GOLD_DEEP}" stroke-width="1.2"/>
+  <ellipse transform="translate(14 -2) rotate(-92) translate(0 18.0)" rx="6" ry="20" fill="#fff3c8" stroke="${GOLD_DEEP}" stroke-width=".9"/>
+  <ellipse transform="translate(14 -2) rotate(-76) translate(0 21.6)" rx="6" ry="24" fill="#fff3c8" stroke="${GOLD_DEEP}" stroke-width=".9"/>
+  <ellipse transform="translate(14 -2) rotate(-62) translate(0 23.4)" rx="6" ry="26" fill="#fff3c8" stroke="${GOLD_DEEP}" stroke-width=".9"/>
+  <ellipse transform="translate(14 -2) rotate(-48) translate(0 23.4)" rx="6" ry="26" fill="#fff3c8" stroke="${GOLD_DEEP}" stroke-width=".9"/>
+  <ellipse transform="translate(14 -2) rotate(-34) translate(0 19.8)" rx="6" ry="22" fill="#fff3c8" stroke="${GOLD_DEEP}" stroke-width=".9"/>
+  <ellipse transform="translate(14 -2) rotate(-22) translate(0 15.3)" rx="6" ry="17" fill="#fff3c8" stroke="${GOLD_DEEP}" stroke-width=".9"/>`;
 
 const EMBLEM: Record<string, Egy> = {
   isis: {
